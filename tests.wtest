@@ -1,0 +1,9 @@
+import wollok.game.*
+import cultivos.*
+import personaje.*
+
+describe "tests granja" {
+  test "sembrar" {
+    
+  }
+}

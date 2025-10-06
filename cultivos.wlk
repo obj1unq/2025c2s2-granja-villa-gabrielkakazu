@@ -10,3 +10,25 @@ class Maiz {
 		return "corn_baby.png"
 	}
 }
+
+class Trigo {
+	method position() {
+
+	}
+
+	method image() {
+		return "wheat_0.png"
+	}
+}
+
+class Tomaco {
+	method position() {
+
+	}
+
+	method image() {
+		return "tomaco_baby.png"
+	}
+
+}
+
