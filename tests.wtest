@@ -4,6 +4,7 @@ import personaje.*
 
 describe "tests granja" {
   test "sembrar" {
+    personaje.sembrar(personaje.position())
     
   }
 }
