@@ -22,9 +22,9 @@ object personaje {
 
 
 	method cosechar(posicion) {
-		const cosechado = granja.obtenerCultivoEn(posicion)
-		cosechado.cosechado()
-		cosecha.add(cosechado)				
+		const cultivo = granja.obtenerCultivoEn(posicion)
+		cultivo.cosechado()
+		cosecha.add(cultivo)				
 	}
 
 	method vender() {
@@ -45,11 +45,16 @@ object personaje {
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = false
+	method esCultivo() = false
 
 
 }
 
 object granja {
+	method obtenerCultivoEn(posicion) {
+		return game.getObjectsIn(posicion).find({cultivo => 
+		cultivo.esCultivo()})
+	}
 
 	method validarRegar(posicion){
 		if (not self.hayCultivo(posicion)){
@@ -83,10 +88,6 @@ object granja {
 
 	}
 
-	method obtenerCultivoEn(posicion) {
-		return game.getObjectsIn(posicion).find({cultivo => 
-		cultivo.esCultivo()})
-
 		 /*if (self.hayMaiz(posicion)) {
 			return new Maiz(position = posicion)}
 			else if (self.hayTomaco(posicion)) {new Tomaco(position = posicion)}
@@ -97,4 +98,4 @@ object granja {
 	}
 
 
-}
+

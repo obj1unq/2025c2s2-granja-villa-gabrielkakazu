@@ -18,6 +18,7 @@ class Maiz {
 
 	 method sembradoPor(sembrador){
 		const nuevoMaiz = new Maiz(position = sembrador.position())
+
 	} 
 
 	method cosechado(){
@@ -57,6 +58,43 @@ object adulto {
 
 	method listoParaCosechar() = true
 
+
+}
+
+class Tomaco {
+	const valor = 80
+	var property position
+
+	method valor() {return valor}
+
+	method image() {
+		return "tomaco_baby.png"
+	}
+
+	method sembradoPor(sembrador){
+		const nuevoTomaco = new Tomaco(position = sembrador.position())
+	} 	
+
+
+	method regado(){
+		if (position.y() == game.height()) {
+			self.position(game.at(position.x(), 0 ))
+		} else {
+			self.position(self.position().up(1))
+		}
+	}
+
+	method cosechado(){
+		
+	}
+
+	method listoParaCosechar() = true
+
+	method esMaiz() = false
+	method esTrigo() = false
+	method esTomaco() = true
+	method esCultivo() = true
+	
 
 }
 
@@ -106,38 +144,5 @@ object trigo0 {
 
 }
 
-class Tomaco {
-	const valor = 80
-	var property position
 
-	method valor() {return valor}
-
-	method image() {
-		return "tomaco_baby.png"
-	}
-
-	method sembradoPor(sembrador){
-		const nuevoMaiz = new Maiz(position = sembrador.position())
-	} 
-
-	
-
-
-	method regado(){
-		
-	}
-
-	method cosechado(){
-		
-	}
-
-	method listoParaCosechar() = true
-
-	method esMaiz() = false
-	method esTrigo() = false
-	method esTomaco() = true
-	method esCultivo() = true
-	
-
-}
 

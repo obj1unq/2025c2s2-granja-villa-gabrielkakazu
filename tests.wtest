@@ -27,4 +27,6 @@ describe "tests granja" {
     const tomaco2 = new Tomaco(position = personaje.position())
     assert.throwsException({personaje.sembrar(tomaco2)})
       }
+
+      
 }
