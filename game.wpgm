@@ -36,5 +36,10 @@ object mecanicas{
 		keyboard.c().onPressDo({personaje.cosechar(personaje.position())})
 		keyboard.v().onPressDo({personaje.vender()})
 
+		keyboard.space().onPressDo({
+			game.say(personaje, "tengo " + personaje.paraVender().size() + " para vender y junté " + 
+			personaje.oro() + " de oro") 
+		})
+
 	}
 }

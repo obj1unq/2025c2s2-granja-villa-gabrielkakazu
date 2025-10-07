@@ -3,11 +3,13 @@ import cultivos.*
 
 object personaje {
 	var property position = game.center()
-	const property image = "fplayer.png"
+	const property image = "mplayer.png"
 
-	var oro = 0
+	var property oro = 0
 
 	const cosecha = []
+
+	method paraVender() {return cosecha }
 
 	method sembrar(cultivo){
 		self.validarSembrar()
@@ -37,8 +39,8 @@ object personaje {
 	method validarSembrar() {
 		const posicion = self.position()
 		return if(granja.hayCultivo(posicion)) {
-			 self.error("ya hay un cultivo aquií")	
-			 game.say(self, "no puedo sembrar aquí")
+			game.say(self, "no puedo sembrar aquí")
+			self.error("ya hay un cultivo aquí")	 
 		} 
 	}
 
@@ -58,8 +60,8 @@ object granja {
 
 	method validarRegar(posicion){
 		if (not self.hayCultivo(posicion)){
-			self.error("Acá no hay cultivo para regar")
 			game.say(personaje, "Acá no hay cultivo para regar")
+			self.error("Acá no hay cultivo para regar")
 		}
 	}
 

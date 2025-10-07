@@ -1,4 +1,5 @@
 import wollok.game.*
+import personaje.*
 
 class Maiz {
 
@@ -77,15 +78,20 @@ class Tomaco {
 
 
 	method regado(){
-		if (position.y() == game.height()) {
-			self.position(game.at(position.x(), 0 ))
-		} else {
+		if (position.y() == game.height()  && 
+			not granja.hayCultivo(game.at(position.x(), 1))
+		) {
+			self.position(game.at(position.x(), 1 ))
+		} else if (not granja.hayCultivo(self.position().up(1)))
+		{
 			self.position(self.position().up(1))
 		}
 	}
 
 	method cosechado(){
-		
+		if (self.listoParaCosechar()){
+			game.removeVisual(self)
+		}	
 	}
 
 	method listoParaCosechar() = true
@@ -112,19 +118,21 @@ class Trigo {
 
 	
 	method regado(){
-		
+		evolucion = evolucion.regado()
 	}
 
 	method valor(){
-
+		evolucion.valor()
 	}
 
 	method cosechado(){
-		
+		if (self.listoParaCosechar()){
+			game.removeVisual(self)
+		}
 	}
 
 	method listoParaCosechar(){
-		return evolucion > 2
+		return evolucion.listoParaCosechar()
 	}
 
 	method esMaiz() = false
@@ -140,9 +148,57 @@ object trigo0 {
 		return "wheat_0.png"
 	}
 
+	method regado(){
+		return trigo1
+	}
+
+	method valor() = 0
+
 	method listoParaCosechar() = false
 
 }
 
+object trigo1 {
 
+	method image() {
+		return "wheat_1.png"
+	}
+
+	method regado(){
+		return trigo2
+	}
+
+	method listoParaCosechar() = false
+
+	method valor() = 0
+}
+
+object trigo2 {
+
+	method valor() = 100
+
+	method image() {
+		return "wheat_2.png"
+	}
+	method regado(){
+		return trigo3
+	}
+
+	method listoParaCosechar() = true
+
+}
+
+object trigo3 {
+
+	method valor() = 200
+	
+	method image() {
+		return "wheat_3.png"
+	}
+	method regado(){
+		return trigo0
+	}
+
+	method listoParaCosechar() = true
+}
 
