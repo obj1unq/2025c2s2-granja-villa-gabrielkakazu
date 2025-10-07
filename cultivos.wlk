@@ -78,10 +78,9 @@ class Tomaco {
 
 
 	method regado(){
-		if (position.y() == game.height()  && 
-			not granja.hayCultivo(game.at(position.x(), 1))
-		) {
-			self.position(game.at(position.x(), 1 ))
+		if (position.y() == game.height()-1  )
+			//&& not granja.hayCultivo(game.at(position.x(), 0)) )
+		 	{position = game.at(position.x(), 0 )
 		} else if (not granja.hayCultivo(self.position().up(1)))
 		{
 			self.position(self.position().up(1))
@@ -95,7 +94,6 @@ class Tomaco {
 	}
 
 	method listoParaCosechar() = true
-
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = true
@@ -191,7 +189,7 @@ object trigo2 {
 object trigo3 {
 
 	method valor() = 200
-	
+
 	method image() {
 		return "wheat_3.png"
 	}
