@@ -16,6 +16,10 @@ class Maiz {
 		estado = adulto
 	}
 
+	 method sembradoPor(sembrador){
+		const nuevoMaiz = new Maiz(position = sembrador.position())
+	} 
+
 	method cosechado(){
 		if (self.listoParaCosechar()){
 			game.removeVisual(self)
@@ -64,16 +68,11 @@ class Trigo {
 		return evolucion.image()
 	}
 
-	method sembrado(sembrador){
+	method sembradoPor(sembrador){
 		const trigo = new Trigo(position = sembrador.position())
-		game.addVisual(trigo)
-
-
 	}
 
-	method esCultivo() = true
-
-
+	
 	method regado(){
 		
 	}
@@ -93,6 +92,7 @@ class Trigo {
 	method esMaiz() = false
 	method esTrigo() = true
 	method esTomaco() = false
+	method esCultivo() = true
 	
 }
 
@@ -116,11 +116,11 @@ class Tomaco {
 		return "tomaco_baby.png"
 	}
 
-	method sembrado(){
-		
-	}
+	method sembradoPor(sembrador){
+		const nuevoMaiz = new Maiz(position = sembrador.position())
+	} 
 
-	method esCultivo() = true
+	
 
 
 	method regado(){
@@ -136,6 +136,7 @@ class Tomaco {
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = true
+	method esCultivo() = true
 	
 
 }

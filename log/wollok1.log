@@ -4020,3 +4020,4 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":339,"timestamp":"2025-10-07T19:01:56.526Z"}
 {"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":302,"timestamp":"2025-10-07T19:01:56.851Z"}
 {"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":247,"timestamp":"2025-10-07T19:01:57.098Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on c:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-granja-villa-gabrielkakazu","timeElapsed":2362614,"timestamp":"2025-10-07T19:19:44.476Z"}

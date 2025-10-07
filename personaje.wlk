@@ -12,6 +12,7 @@ object personaje {
 	method sembrar(cultivo){
 		self.validarSembrar()
 		game.addVisual(cultivo)
+		cultivo.sembradoPor(self)
 	}
 
 	method regar(posicion) {
@@ -36,7 +37,8 @@ object personaje {
 	method validarSembrar() {
 		const posicion = self.position()
 		return if(granja.hayCultivo(posicion)) {
-			 self.error("celda llena")	
+			 self.error("ya hay un cultivo aquií")	
+			 game.say(self, "no puedo sembrar aquí")
 		} 
 	}
 
@@ -52,6 +54,7 @@ object granja {
 	method validarRegar(posicion){
 		if (not self.hayCultivo(posicion)){
 			self.error("Acá no hay cultivo para regar")
+			game.say(personaje, "Acá no hay cultivo para regar")
 		}
 	}
 
