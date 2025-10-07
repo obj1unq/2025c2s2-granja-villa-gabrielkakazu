@@ -10,9 +10,31 @@ program farmville {
 	game.ground("ground.png")
 
 	//  VISUALES
+	game.addVisual(maiz)
  	game.addVisualCharacter(personaje)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
+	
+	mecanicas.teclado()
  	
  	//  COMIENZA
 	game.start()
+}
+
+object mecanicas{
+
+	method teclado(){
+		keyboard.m().onPressDo({
+			personaje.sembrar(new Maiz(position = personaje.position()))})
+		
+		keyboard.t().onPressDo({
+			personaje.sembrar(new Trigo(position = personaje.position()))})
+
+		keyboard.o().onPressDo({
+			personaje.sembrar(new Tomaco(position = personaje.position()))})
+			
+
+		keyboard.r().onPressDo({personaje.regar(personaje.position())})
+		keyboard.c().onPressDo({personaje.cosechar(personaje.position())})
+		keyboard.v().onPressDo({personaje.vender()})
+
+	}
 }

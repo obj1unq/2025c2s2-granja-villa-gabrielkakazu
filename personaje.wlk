@@ -10,49 +10,44 @@ object personaje {
 	const cosecha = []
 
 	method sembrar(cultivo){
-		self.celdaVacia()
-		cultivo.sembrado()
+		self.validarSembrar()
+		game.addVisual(cultivo)
 	}
 
 	method regar(posicion) {
 		granja.validarRegar(posicion)
-		
+		granja.obtenerCultivoEn(posicion).regado()		
 	}
 
 
 	method cosechar(posicion) {
-		
-		cosecha.add()
-		
+		const cosechado = granja.obtenerCultivoEn(posicion)
+		cosechado.cosechado()
+		cosecha.add(cosechado)				
 	}
 
 	method vender() {
 		const renta = cosecha.sum({cultivo => cultivo.valor()})
+		game.say(self, "gané " + renta + " oro")
 		oro += renta 
-		cosecha.claer()
+		cosecha.clear()
 	}
 
-	method celdaVacia() {
+	method validarSembrar() {
 		const posicion = self.position()
-		return if(game.getObjectsIn(posicion).size()>1) {
+		return if(granja.hayCultivo(posicion)) {
 			 self.error("celda llena")	
 		} 
 	}
+
+	method esMaiz() = false
+	method esTrigo() = false
+	method esTomaco() = false
 
 
 }
 
 object granja {
-
-	method obtenerCultivoEn(posicion) {
-		return if (self.hayTomaco(posicion)) {tomaco}
-			else if (self.hayMaiz(posicion)) {maiz}
-			else if (self.hayTrigo(posicion)){trigo}
-			else {
-				self.error("no hay cultivo")
-			}
-	}
-	
 
 	method validarRegar(posicion){
 		if (not self.hayCultivo(posicion)){
@@ -67,18 +62,36 @@ object granja {
 	}
 
 	method hayTrigo(posicion) {
-		return game.getObjectsIn(posicion).contains(trigo)
+		return game.getObjectsIn(posicion).any({
+			cultivo => cultivo.esTrigo()
+		})
 	}
 
 	method hayMaiz(posicion) {
-		return game.getObjectsIn(posicion).contains(maiz)
+		return game.getObjectsIn(posicion).any({
+			cultivo => cultivo.esMaiz()
+		})
 	}
 
 	method hayTomaco(posicion) {
-		return game.getObjectsIn(posicion).contains(tomaco)
+		return game.getObjectsIn(posicion).any({
+			cultivo => cultivo.esTomaco()
+		})
+
 	}
 
+	method obtenerCultivoEn(posicion) {
+		return game.getObjectsIn(posicion).find({cultivo => 
+		cultivo.esCultivo()})
 
+		 /*if (self.hayMaiz(posicion)) {
+			return new Maiz(position = posicion)}
+			else if (self.hayTomaco(posicion)) {new Tomaco(position = posicion)}
+			else if (self.hayTrigo(posicion)){new Trigo(position = posicion)}
+			else {
+				return self.error("no hay cultivo")
+			}*/
+	}
 
 
 }

@@ -4,7 +4,27 @@ import personaje.*
 
 describe "tests granja" {
   test "sembrar" {
-    personaje.sembrar(personaje.position())
+    const trigo = new Trigo (position = game.center())
+    personaje.position(game.center())
+    personaje.sembrar(trigo)
+    assert.that(granja.hayTrigo(game.center()))
+    assert.equals(trigo, granja.obtenerCultivoEn(game.center()))
     
-  }
+    personaje.position(game.origin())
+      const maiz = new Maiz(position = personaje.position())
+    personaje.sembrar(maiz)
+    assert.that(granja.hayMaiz(game.origin()))
+    assert.equals(maiz, granja.obtenerCultivoEn(game.origin()))
+
+    personaje.position(game.at(3,2))
+      const tomaco = new Tomaco(position = personaje.position())
+    personaje.sembrar(tomaco)
+    assert.that(granja.hayTomaco(personaje.position()))
+    assert.equals(game.at(3,2), tomaco.position())
+    assert.equals(tomaco, granja.obtenerCultivoEn(personaje.position()))
+
+    personaje.position(game.center())
+    const tomaco2 = new Tomaco(position = personaje.position())
+    assert.throwsException({personaje.sembrar(tomaco2)})
+      }
 }
