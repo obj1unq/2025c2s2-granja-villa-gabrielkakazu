@@ -24,6 +24,16 @@ class Maiz {
 	}
 }
 
+const maiz = new Maiz()
+
+object bebe {
+
+}
+
+object adulto {
+
+}
+
 class Trigo {
 	var evolucion = 0
 
@@ -51,6 +61,8 @@ class Trigo {
 	}
 }
 
+const trigo = new Trigo()
+
 class Tomaco {
 	const valor = 80
 
@@ -74,4 +86,6 @@ class Tomaco {
 	}
 
 }
+
+const tomaco = new Tomaco()
 
