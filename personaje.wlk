@@ -49,6 +49,8 @@ object personaje {
 	method esTomaco() = false
 	method esCultivo() = false
 
+	
+
 
 }
 
@@ -97,6 +99,8 @@ object granja {
 			else {
 				return self.error("no hay cultivo")
 			}*/
+	
+
 	}
 
 
