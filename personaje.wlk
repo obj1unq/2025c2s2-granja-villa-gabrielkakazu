@@ -8,6 +8,8 @@ object personaje {
 	var property oro = 0
 
 	const cosecha = []
+	const vendido = []
+	const aspersores = []
 
 	method paraVender() {return cosecha }
 
@@ -16,6 +18,24 @@ object personaje {
 		game.addVisual(cultivo)
 		cultivo.sembradoPor(self)
 	}
+
+	method instalar(aparato){
+		self.validarUbicacion(aparato)
+		aspersores.add(aparato)
+		game.addVisual(aparato)
+	}
+
+	method encenderAspersor(){
+        game.onTick(1 * 1000, "riego Aspersor", {
+			aspersores.forEach({
+				aparato => aparato.regarRango()
+        		}
+			)}
+		) 
+	}
+
+
+
 
 	method regar(posicion) {
 		granja.validarRegar(posicion)
@@ -35,6 +55,11 @@ object personaje {
 		oro += renta 
 		cosecha.clear()
 	}
+/*
+	method vendido() {
+	}
+*/
+
 
 	method validarSembrar() {
 		const posicion = self.position()
@@ -44,10 +69,21 @@ object personaje {
 		} 
 	}
 
+	method validarUbicacion(aparato) {
+		const posicion = self.position()
+		return if(!granja.hayCultivo(posicion) && granja.hayAspersor(posicion)) {
+			game.say(self, "no puedo sembrar aquí")
+			self.error("ya hay un cultivo aquí")	 
+		} 
+	}
+
+	
+
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = false
 	method esCultivo() = false
+	method esAspersor() = false
 
 	
 
@@ -55,6 +91,9 @@ object personaje {
 }
 
 object granja {
+
+	// const utilidades = []
+
 	method obtenerCultivoEn(posicion) {
 		return game.getObjectsIn(posicion).find({cultivo => 
 		cultivo.esCultivo()})
@@ -90,6 +129,12 @@ object granja {
 			cultivo => cultivo.esTomaco()
 		})
 
+	}
+
+	method hayAspersor(posicion) {
+		return game.getObjectsIn(posicion).any({
+			cosa => cosa.esAspersor()
+		})
 	}
 
 		 /*if (self.hayMaiz(posicion)) {

@@ -1,6 +1,7 @@
 import wollok.game.*
 import personaje.*
 import cultivos.*
+import bonus.*
 
 program farmville {
 	//  CONFIG	
@@ -11,6 +12,9 @@ program farmville {
 
 	//  VISUALES
 	game.addVisual(maiz)
+	game.addVisual(mercado1)
+	game.addVisual(mercado2)
+	game.addVisual(mercado3)
  	game.addVisualCharacter(personaje)
 	
 	mecanicas.teclado()
@@ -40,6 +44,13 @@ object mecanicas{
 			game.say(personaje, "tengo " + personaje.paraVender().size() + " para vender y junté " + 
 			personaje.oro() + " de oro") 
 		})
+
+		keyboard.a().onPressDo({
+			personaje.instalar(new Aspersor(position = personaje.position()))})
+
+		keyboard.e().onPressDo({
+			personaje.encenderAspersor()})
+
 
 	}
 }

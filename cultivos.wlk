@@ -1,5 +1,6 @@
 import wollok.game.*
 import personaje.*
+import bonus.*
 
 class Maiz {
 
@@ -36,6 +37,7 @@ class Maiz {
 	method esTrigo() = false
 	method esTomaco() = false
 	method esCultivo() = true
+	method esAspersor() = false
 
 }
 
@@ -98,6 +100,7 @@ class Tomaco {
 	method esTrigo() = false
 	method esTomaco() = true
 	method esCultivo() = true
+	method esAspersor() = false
 	
 
 }
@@ -137,6 +140,7 @@ class Trigo {
 	method esTrigo() = true
 	method esTomaco() = false
 	method esCultivo() = true
+	method esAspersor() = false
 	
 }
 
