@@ -419,3 +419,9 @@
 {"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":287,"timestamp":"2025-10-11T21:59:02.229Z"}
 {"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":260,"timestamp":"2025-10-11T21:59:02.527Z"}
 {"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on c:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-granja-villa-gabrielkakazu","timeElapsed":472713,"timestamp":"2025-10-11T21:59:19.772Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.farmville\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-granja-villa-gabrielkakazu\u001b[39m\u001b[23m","ok":true,"timeElapsed":1497,"timestamp":"2025-10-11T21:59:28.061Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":915,"timestamp":"2025-10-11T22:04:01.266Z"}
+{"level":"info","message":"⌛ Validating cultivos.wlk","timeElapsed":618,"timestamp":"2025-10-11T22:04:01.887Z"}
+{"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":301,"timestamp":"2025-10-11T22:04:02.191Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":324,"timestamp":"2025-10-11T22:04:02.516Z"}
+{"level":"info","message":"⌛ Validating bonus.wlk","timeElapsed":246,"timestamp":"2025-10-11T22:04:02.763Z"}
