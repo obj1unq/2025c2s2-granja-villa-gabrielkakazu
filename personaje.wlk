@@ -54,11 +54,9 @@ object personaje {
 
 	method venderAMercado() {
 		
-			
-		// granja.hayMercado(position)		//verifico que estoy en mercado
 		const mercadito = granja.obtenerMercadoEn(position)	//obtengo el objeto mercadito
 		
-		// self.validarVentaAMercado()	
+		 self.validarVentaAMercado()	
 	
 		const venta = self.valorTotalCosecha() //mi ganancia
 		oro += venta	
@@ -72,11 +70,11 @@ object personaje {
 	method validarVentaAMercado() {
 		return 	if (not granja.hayMercado(position)) {
 			game.say(self, "No estoy en un mercado")
-		//	self.error("no hay mercado")
+			self.error("no hay mercado")
 		}		
 		else if (!granja.obtenerMercadoEn(position).puedeComprar(self) ){
 			game.say(self, "El mercado no me puede comprar mi cosecha")
-		//	self.error("no hay fondos en mercado")
+			self.error("no hay fondos en mercado")
 		}
 	}
 

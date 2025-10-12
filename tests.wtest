@@ -1,6 +1,7 @@
 import wollok.game.*
 import cultivos.*
 import personaje.*
+import bonus.*
 
 describe "tests granja" {
   test "sembrar" {
@@ -27,6 +28,31 @@ describe "tests granja" {
     const tomaco2 = new Tomaco(position = personaje.position())
     assert.throwsException({personaje.sembrar(tomaco2)})
       }
+  
+  test "regar, cosechar y vender" {
+      personaje.position(game.center())
+      const tomaco1 = new Tomaco(position = personaje.position())
+      game.addVisual(tomaco1)
+      personaje.cosechar(personaje.position())
+      assert.that(personaje.paraVender().contains(tomaco1))
+      assert.throwsException({personaje.cosechar(personaje.position())})
+
+      assert.throwsException({personaje.regar(personaje.position())})
+      const maicito1 = new Maiz(position = personaje.position() )
+      personaje.sembrar(maicito1)
+      personaje.regar(personaje.position())
+      personaje.cosechar(personaje.position())
+      assert.that(personaje.paraVender().contains(maicito1))
+
+      
+      assert.notThat(personaje.paraVender().isEmpty())
+      assert.equals(230, personaje.valorTotalCosecha())
+      personaje.vender()
+      assert.equals(0, personaje.valorTotalCosecha())
+      assert.equals(230, personaje.oro())
+      assert.that(personaje.paraVender().isEmpty())
+  }
+
 
       
 }
