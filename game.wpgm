@@ -51,6 +51,8 @@ object mecanicas{
 		keyboard.e().onPressDo({
 			personaje.encenderAspersor()})
 
+		keyboard.x().onPressDo({
+			personaje.venderAMercado()})
 
 	}
 }

@@ -38,6 +38,7 @@ class Maiz {
 	method esTomaco() = false
 	method esCultivo() = true
 	method esAspersor() = false
+	method esMercado() = false
 
 }
 
@@ -101,7 +102,7 @@ class Tomaco {
 	method esTomaco() = true
 	method esCultivo() = true
 	method esAspersor() = false
-	
+	method esMercado() = false
 
 }
 
@@ -141,6 +142,7 @@ class Trigo {
 	method esTomaco() = false
 	method esCultivo() = true
 	method esAspersor() = false
+	method esMercado() = false
 	
 }
 

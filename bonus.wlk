@@ -29,6 +29,7 @@ class Aspersor{
 	method esTomaco() = false
 	method esCultivo() = false
     method esAspersor() = true
+    method esMercado() = false
 
 	
 }
@@ -39,13 +40,20 @@ object alrededor() {
 
 class Mercado {
     var property position
-    var property fondos = 10000
+    var property fondos = 50000
     const stock = []
 
     method image() { return "market.png"}
 
     method recibirDe(proveedor){
-        //stock.addAll(proveedor.vendido())
+        const comprado = proveedor.totalCosecha()
+        fondos -= comprado
+        stock.addAll(proveedor.cosecha())
+        game.say(self, "- " + comprado)
+    }
+
+    method puedeComprar(proveedor) {
+        return fondos >= proveedor.totalCosecha()
     }
 
     method esMaiz() = false
@@ -59,5 +67,5 @@ class Mercado {
 }
 
 const mercado1 = new Mercado(position = game.at(0,0))
-const mercado2 = new Mercado(position = game.at(10,0))
-const mercado3 = new Mercado(position = game.at(0,10))
+const mercado2 = new Mercado(position = game.at(9,0))
+const mercado3 = new Mercado(position = game.at(0,9))

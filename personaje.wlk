@@ -8,7 +8,6 @@ object personaje {
 	var property oro = 0
 
 	const cosecha = []
-	const vendido = []
 	const aspersores = []
 
 	method paraVender() {return cosecha }
@@ -34,14 +33,10 @@ object personaje {
 		) 
 	}
 
-
-
-
 	method regar(posicion) {
 		granja.validarRegar(posicion)
 		granja.obtenerCultivoEn(posicion).regado()		
 	}
-
 
 	method cosechar(posicion) {
 		const cultivo = granja.obtenerCultivoEn(posicion)
@@ -55,11 +50,30 @@ object personaje {
 		oro += renta 
 		cosecha.clear()
 	}
+
+	method venderAMercado() {
+		const venta = self.totalCosecha()
+		granja.hayMercado(position)
+		self.validarVentaAMercado()	
+		granja.obtenerMercadoEn(position).recibirDe(self)
+		oro += venta
+		game.say(self, "gané" + venta + " oro")
+		cosecha.clear()
+	}
+
+	method validarVentaAMercado() {
+		return 	if (!granja.obtenerMercadoEn(position).puedeComprar(self) ){
+			self.error("mercado no tiene fondos suficientes")
+		}
+	}
+
+	method totalCosecha() {
+		return cosecha.sum({cultivo => cultivo.valor()})
+	}
 /*
 	method vendido() {
 	}
 */
-
 
 	method validarSembrar() {
 		const posicion = self.position()
@@ -77,15 +91,12 @@ object personaje {
 		} 
 	}
 
-	
-
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = false
 	method esCultivo() = false
 	method esAspersor() = false
-
-	
+	method esMercado() = false
 
 
 }
@@ -128,13 +139,23 @@ object granja {
 		return game.getObjectsIn(posicion).any({
 			cultivo => cultivo.esTomaco()
 		})
-
 	}
 
 	method hayAspersor(posicion) {
 		return game.getObjectsIn(posicion).any({
 			cosa => cosa.esAspersor()
 		})
+	}
+
+	method hayMercado(posicion){
+		return game.getObjectsIn(posicion).any({
+			cosa => cosa.esMercado()
+		})
+	}
+
+	method obtenerMercadoEn(posicion) {
+		return game.getObjectsIn(posicion).find({cosa => 
+			cosa.esMercado()})
 	}
 
 		 /*if (self.hayMaiz(posicion)) {
