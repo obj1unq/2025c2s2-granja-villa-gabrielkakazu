@@ -28,13 +28,10 @@ object mecanicas{
 	method teclado(){
 		keyboard.m().onPressDo({
 			personaje.sembrar(new Maiz(position = personaje.position()))})
-		
 		keyboard.t().onPressDo({
 			personaje.sembrar(new Trigo(position = personaje.position()))})
-
 		keyboard.o().onPressDo({
 			personaje.sembrar(new Tomaco(position = personaje.position()))})
-			
 
 		keyboard.r().onPressDo({personaje.regar(personaje.position())})
 		keyboard.c().onPressDo({personaje.cosechar(personaje.position())})
@@ -51,7 +48,7 @@ object mecanicas{
 		keyboard.e().onPressDo({
 			personaje.encenderAspersor()})
 
-		keyboard.x().onPressDo({
+		keyboard.w().onPressDo({
 			personaje.venderAMercado()})
 
 	}

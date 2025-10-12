@@ -33,10 +33,10 @@ class Maiz {
 		return estado.listoParaCosechar()
 	}
 
+	method esCultivo() = true
 	method esMaiz() = true
 	method esTrigo() = false
 	method esTomaco() = false
-	method esCultivo() = true
 	method esAspersor() = false
 	method esMercado() = false
 
@@ -97,10 +97,11 @@ class Tomaco {
 	}
 
 	method listoParaCosechar() = true
+
+	method esCultivo() = true
 	method esMaiz() = false
 	method esTrigo() = false
 	method esTomaco() = true
-	method esCultivo() = true
 	method esAspersor() = false
 	method esMercado() = false
 
@@ -124,7 +125,7 @@ class Trigo {
 	}
 
 	method valor(){
-		evolucion.valor()
+		return evolucion.valor()
 	}
 
 	method cosechado(){
@@ -137,10 +138,10 @@ class Trigo {
 		return evolucion.listoParaCosechar()
 	}
 
+	method esCultivo() = true
 	method esMaiz() = false
 	method esTrigo() = true
 	method esTomaco() = false
-	method esCultivo() = true
 	method esAspersor() = false
 	method esMercado() = false
 	
@@ -156,7 +157,7 @@ object trigo0 {
 		return trigo1
 	}
 
-	method valor() = 0
+	method valor() {return 0}
 
 	method listoParaCosechar() = false
 
@@ -174,12 +175,12 @@ object trigo1 {
 
 	method listoParaCosechar() = false
 
-	method valor() = 0
+	method valor() {return 0}
 }
 
 object trigo2 {
 
-	method valor() = 100
+	method valor() {return 100}
 
 	method image() {
 		return "wheat_2.png"
@@ -194,7 +195,7 @@ object trigo2 {
 
 object trigo3 {
 
-	method valor() = 200
+	method valor() {return 200}
 
 	method image() {
 		return "wheat_3.png"

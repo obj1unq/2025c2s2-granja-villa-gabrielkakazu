@@ -46,14 +46,14 @@ class Mercado {
     method image() { return "market.png"}
 
     method recibirDe(proveedor){
-        const comprado = proveedor.totalCosecha()
+        const comprado = proveedor.valorTotalCosecha()
         fondos -= comprado
-        stock.addAll(proveedor.cosecha())
+        stock.addAll(proveedor.paraVender())
         game.say(self, "- " + comprado)
     }
 
     method puedeComprar(proveedor) {
-        return fondos >= proveedor.totalCosecha()
+        return fondos >= proveedor.valorTotalCosecha()
     }
 
     method esMaiz() = false
@@ -67,5 +67,5 @@ class Mercado {
 }
 
 const mercado1 = new Mercado(position = game.at(0,0))
-const mercado2 = new Mercado(position = game.at(9,0))
-const mercado3 = new Mercado(position = game.at(0,9))
+const mercado2 = new Mercado(position = game.at(8,0))
+const mercado3 = new Mercado(position = game.at(0,8))

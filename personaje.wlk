@@ -1,5 +1,6 @@
 import wollok.game.*
 import cultivos.*
+import bonus.*
 
 object personaje {
 	var property position = game.center()
@@ -45,30 +46,42 @@ object personaje {
 	}
 
 	method vender() {
-		const renta = cosecha.sum({cultivo => cultivo.valor()})
+		const renta = self.valorTotalCosecha()
 		game.say(self, "gané " + renta + " oro")
 		oro += renta 
 		cosecha.clear()
 	}
 
 	method venderAMercado() {
-		const venta = cosecha.sum({cultivo => cultivo.valor()})
-		granja.hayMercado(position)
-		self.validarVentaAMercado()	
-		granja.obtenerMercadoEn(position).recibirDe(self)
-		oro += venta
+		
+			
+		// granja.hayMercado(position)		//verifico que estoy en mercado
+		const mercadito = granja.obtenerMercadoEn(position)	//obtengo el objeto mercadito
+		
+		// self.validarVentaAMercado()	
+	
+		const venta = self.valorTotalCosecha() //mi ganancia
+		oro += venta	
+		
+		mercadito.recibirDe(self)	//paso la operación
+
 		game.say(self, "gané" + venta + " oro")
 		cosecha.clear()
 	}
 
 	method validarVentaAMercado() {
-		return 	if (!granja.obtenerMercadoEn(position).puedeComprar(self) ){
-			self.error("mercado no tiene fondos suficientes")
+		return 	if (not granja.hayMercado(position)) {
+			game.say(self, "No estoy en un mercado")
+		//	self.error("no hay mercado")
+		}		
+		else if (!granja.obtenerMercadoEn(position).puedeComprar(self) ){
+			game.say(self, "El mercado no me puede comprar mi cosecha")
+		//	self.error("no hay fondos en mercado")
 		}
 	}
 
-	method totalCosecha() {
-		return cosecha.sum({cultivo => cultivo.valor()})
+	method valorTotalCosecha() {
+			return cosecha.sum({cultivo => cultivo.valor()})
 	}
 /*
 	method vendido() {
@@ -77,17 +90,17 @@ object personaje {
 
 	method validarSembrar() {
 		const posicion = self.position()
-		return if(granja.hayCultivo(posicion)) {
+		return if(granja.hayCultivo(posicion) or granja.hayAparato(posicion)) {
 			game.say(self, "no puedo sembrar aquí")
-			self.error("ya hay un cultivo aquí")	 
+			self.error("no se puede sembrar")	 
 		} 
 	}
 
 	method validarUbicacion(aparato) {
 		const posicion = self.position()
-		return if(!granja.hayCultivo(posicion) && granja.hayAspersor(posicion)) {
-			game.say(self, "no puedo sembrar aquí")
-			self.error("ya hay un cultivo aquí")	 
+		return if(granja.hayCultivo(posicion) or granja.hayAspersor(posicion)) {
+			game.say(self, "no se puede instalar aquí")
+			self.error("no se puede instalar aquí")	 
 		} 
 	}
 
@@ -105,6 +118,11 @@ object granja {
 
 	// const utilidades = []
 
+	method obtenerMercadoEn(posicion) {
+		return game.getObjectsIn(posicion).find({cosa => 
+			cosa.esMercado()})
+	}
+
 	method obtenerCultivoEn(posicion) {
 		return game.getObjectsIn(posicion).find({cultivo => 
 		cultivo.esCultivo()})
@@ -121,6 +139,10 @@ object granja {
 		return  self.hayTrigo(posicion) or self.hayMaiz(posicion)
 				 or self.hayTomaco(posicion)
 				
+	}
+
+	method hayAparato(posicion) {
+		return  self.hayAspersor(posicion) or self.hayMercado(posicion)
 	}
 
 	method hayTrigo(posicion) {
@@ -151,23 +173,9 @@ object granja {
 		return game.getObjectsIn(posicion).any({
 			cosa => cosa.esMercado()
 		})
-	}
+	}	
 
-	method obtenerMercadoEn(posicion) {
-		return game.getObjectsIn(posicion).find({cosa => 
-			cosa.esMercado()})
-	}
-
-		 /*if (self.hayMaiz(posicion)) {
-			return new Maiz(position = posicion)}
-			else if (self.hayTomaco(posicion)) {new Tomaco(position = posicion)}
-			else if (self.hayTrigo(posicion)){new Trigo(position = posicion)}
-			else {
-				return self.error("no hay cultivo")
-			}*/
-	
-
-	}
+}
 
 
 
