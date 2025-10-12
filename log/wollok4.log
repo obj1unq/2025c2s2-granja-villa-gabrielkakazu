@@ -2571,3 +2571,4 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":387,"timestamp":"2025-10-12T02:02:15.358Z"}
 {"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":459,"timestamp":"2025-10-12T02:02:15.852Z"}
 {"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":354,"timestamp":"2025-10-12T02:02:16.308Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on c:\\Users\\Gabriel\\Desktop\\ProyectosWollok\\GIT\\2025c2s2-granja-villa-gabrielkakazu","timeElapsed":473802,"timestamp":"2025-10-12T02:08:09.710Z"}

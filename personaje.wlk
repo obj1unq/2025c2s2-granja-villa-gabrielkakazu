@@ -52,7 +52,7 @@ object personaje {
 	}
 
 	method venderAMercado() {
-		const venta = self.totalCosecha()
+		const venta = cosecha.sum({cultivo => cultivo.valor()})
 		granja.hayMercado(position)
 		self.validarVentaAMercado()	
 		granja.obtenerMercadoEn(position).recibirDe(self)
