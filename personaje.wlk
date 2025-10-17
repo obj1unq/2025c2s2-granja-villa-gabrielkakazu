@@ -1,6 +1,7 @@
 import wollok.game.*
 import cultivos.*
 import bonus.*
+import granja.*
 
 object personaje {
 	var property position = game.center()
@@ -25,14 +26,14 @@ object personaje {
 		game.addVisual(aparato)
 	}
 
-	method encenderAspersor(){
-        game.onTick(1 * 1000, "riego Aspersor", {
-			aspersores.forEach({
-				aparato => aparato.regarRango()
-        		}
-			)}
-		) 
+	method ejecutarAspersor(){
+		if (granja.hayAspersor(position)){
+			granja.obtenerAspersorEn(position).ejecutar()
+		}
 	}
+
+	
+
 
 	method regar(posicion) {
 		granja.validarRegar(posicion)
@@ -52,6 +53,7 @@ object personaje {
 		cosecha.clear()
 	}
 
+// BONUS
 	method venderAMercado() {
 		
 		const mercadito = granja.obtenerMercadoEn(position)	//obtengo el objeto mercadito
@@ -81,10 +83,7 @@ object personaje {
 	method valorTotalCosecha() {
 			return cosecha.sum({cultivo => cultivo.valor()})
 	}
-/*
-	method vendido() {
-	}
-*/
+
 
 	method validarSembrar() {
 		const posicion = self.position()
@@ -102,78 +101,8 @@ object personaje {
 		} 
 	}
 
-	method esMaiz() = false
-	method esTrigo() = false
-	method esTomaco() = false
-	method esCultivo() = false
-	method esAspersor() = false
-	method esMercado() = false
 
 
 }
-
-object granja {
-
-	// const utilidades = []
-
-	method obtenerMercadoEn(posicion) {
-		return game.getObjectsIn(posicion).find({cosa => 
-			cosa.esMercado()})
-	}
-
-	method obtenerCultivoEn(posicion) {
-		return game.getObjectsIn(posicion).find({cultivo => 
-		cultivo.esCultivo()})
-	}
-
-	method validarRegar(posicion){
-		if (not self.hayCultivo(posicion)){
-			game.say(personaje, "Acá no hay cultivo para regar")
-			self.error("Acá no hay cultivo para regar")
-		}
-	}
-
-	method hayCultivo(posicion) {
-		return  self.hayTrigo(posicion) or self.hayMaiz(posicion)
-				 or self.hayTomaco(posicion)
-				
-	}
-
-	method hayAparato(posicion) {
-		return  self.hayAspersor(posicion) or self.hayMercado(posicion)
-	}
-
-	method hayTrigo(posicion) {
-		return game.getObjectsIn(posicion).any({
-			cultivo => cultivo.esTrigo()
-		})
-	}
-
-	method hayMaiz(posicion) {
-		return game.getObjectsIn(posicion).any({
-			cultivo => cultivo.esMaiz()
-		})
-	}
-
-	method hayTomaco(posicion) {
-		return game.getObjectsIn(posicion).any({
-			cultivo => cultivo.esTomaco()
-		})
-	}
-
-	method hayAspersor(posicion) {
-		return game.getObjectsIn(posicion).any({
-			cosa => cosa.esAspersor()
-		})
-	}
-
-	method hayMercado(posicion){
-		return game.getObjectsIn(posicion).any({
-			cosa => cosa.esMercado()
-		})
-	}	
-
-}
-
 
 
