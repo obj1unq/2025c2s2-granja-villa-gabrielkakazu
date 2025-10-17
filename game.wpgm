@@ -2,6 +2,7 @@ import wollok.game.*
 import personaje.*
 import cultivos.*
 import bonus.*
+import granja.*
 
 program farmville {
 	//  CONFIG	
@@ -46,7 +47,8 @@ object mecanicas{
 			personaje.instalar(new Aspersor(position = personaje.position()))})
 
 		keyboard.e().onPressDo({
-			personaje.encenderAspersor()})
+			personaje.ejecutarAspersor()})
+		
 
 		keyboard.w().onPressDo({
 			personaje.venderAMercado()})
