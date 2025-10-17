@@ -20,6 +20,10 @@ class Aspersor{
     const listaRango = alrededor.direcciones()
 
     method rango() = listaRango.map{posicion => {posicion.lugar.(position) }
+
+    const property rango = 
+        direcciones.listaCuatro(position).union(diagonales.listaCuatro(position))
+
   */  
 
     method regarRango() {
@@ -63,47 +67,6 @@ object encendido {
     method siEstaOn() {return true}
 }
 
-object alrededor {
-    const diagonales = [noroeste, noreste, sudoeste, sudeste]
-
-    const contiguos = [norte, sur, este, oeste]
-
-    method direcciones() {return diagonales + contiguos}
-}
-
-object noroeste{
-    method lugar(centro) {return centro.up(1).left(1)}
-}
-
-object noreste{
-    method lugar(centro) {return centro.up(1).right(1)}
-}
-
-object sudoeste{
-    method lugar(centro) {return centro.down(1).left(1)}
-}
-
-object sudeste{
-    method lugar(centro) {return centro.down(1).right(1)}
-}
-
-object norte{
-    method lugar(centro) {return centro.up(1)}
-}
-
-object este{
-    method lugar(centro) {return centro.right(1)}
-}
-
-object oeste {
-    method lugar(centro) {return centro.left(1)}
-}
-
-
-object sur {
-    method lugar(centro) {return centro.down(1)}
-}
-
 class Mercado {
     var property position
     var property fondos = 1000
@@ -127,3 +90,49 @@ class Mercado {
 const mercado1 = new Mercado(position = game.at(3,3))
 const mercado2 = new Mercado(position = game.at(3,4))
 const mercado3 = new Mercado(position = game.at(3,5))
+/*
+object diagonales {
+    method noreste(posicion) = posicion.up(1).right(1)
+    method noroeste(posicion) = posicion.up(1).left(1)
+    method sudeste(posicion) = posicion.down(1).right(1)
+    method sudoeste(posicion) = posicion.down(1).left(1)
+
+    method listaCuatro(centro) {
+        const cuatro = []
+        cuatro.add(self.noroeste(centro))
+        cuatro.add(self.noreste(centro))
+        cuatro.add(self.sudeste(centro))
+        cuatro.add(self.sudoeste(centro))
+        return cuatro
+    }
+}
+
+object direcciones {
+    const property cuatro = []
+
+    method listaCuatro(centro) {
+        cuatro.add(norte.lugar(centro))
+        cuatro.add(este.lugar(centro))
+        cuatro.add(sur.lugar(centro))
+        cuatro.add(oeste.lugar(centro))
+        return cuatro
+    }
+}
+
+object norte{
+    method lugar(centro) {return centro.up(1)}
+}
+
+object este{
+    method lugar(centro) {return centro.right(1)}
+}
+
+object oeste {
+    method lugar(centro) {return centro.left(1)}
+}
+
+
+object sur {
+    method lugar(centro) {return centro.down(1)}
+}
+*/
