@@ -2,6 +2,7 @@ import wollok.game.*
 import cultivos.*
 import personaje.*
 import bonus.*
+import granja.*
 
 describe "tests granja" {
   test "sembrar" {
@@ -53,6 +54,64 @@ describe "tests granja" {
       assert.that(personaje.paraVender().isEmpty())
   }
 
+  test "aspersores" {
+    const maicito = new Maiz(position = game.at(1,1))
+    const tomaquito = new Tomaco(position = game.at(1,0))
+    const triguito = new Trigo(position = game.at(0,1))
+    const aspersorEj = new Aspersor(position = personaje.position())
+    personaje.position(game.origin())
+    personaje.instalar(aspersorEj)
+    game.addVisual(maicito)
+    game.addVisual(triguito)
+    game.addVisual(tomaquito)
+    personaje.position(triguito.position())
 
+    // error instalar aspersor sobre cultivo
+    assert.throwsException({personaje.instalar(new Aspersor(position = triguito.position()))})
+    
+    assert.notThat(triguito.listoParaCosechar())
+    assert.notThat(maicito.listoParaCosechar())
+    aspersorEj.regarRango()
+
+    assert.that(maicito.listoParaCosechar())
+    assert.equals(game.at(1,0), tomaquito.position()) //el tomaco no se mueve
+    personaje.position(maicito.position())
+    personaje.cosechar(maicito.position())
+    assert.notThat(granja.hayCultivo(game.at(1,1)))
+  }
+
+  test "mercados" {
+    personaje.position(game.center())
+      const tomaco1 = new Tomaco(position = personaje.position())
+      game.addVisual(tomaco1)
+      personaje.cosechar(personaje.position())
+      assert.that(personaje.paraVender().contains(tomaco1))
+      assert.throwsException({personaje.cosechar(personaje.position())})
+
+      assert.throwsException({personaje.regar(personaje.position())})
+      const maicito1 = new Maiz(position = personaje.position() )
+      personaje.sembrar(maicito1)
+      personaje.regar(personaje.position())
+      personaje.cosechar(personaje.position())
+      assert.that(personaje.paraVender().contains(maicito1))
+
+      
+      assert.notThat(personaje.paraVender().isEmpty())
+      assert.equals(230, personaje.valorTotalCosecha())
+
+      game.addVisual(mercado1)
+      assert.throwsException({personaje.venderAMercado()}) // no está en posicion 
+      personaje.position(mercado1.position())
+      assert.equals(1000, mercado1.fondos())
+      assert.that(mercado1.stock().isEmpty())
+
+      personaje.venderAMercado() //ahora sí
+      assert.equals(0, personaje.valorTotalCosecha())
+      assert.equals(230, personaje.oro())
+      assert.that(personaje.paraVender().isEmpty())
+      assert.equals(770, mercado1.fondos())
+      assert.that(mercado1.stock().contains(maicito1))
+      assert.that(mercado1.stock().contains(tomaco1))
+  }
       
 }
