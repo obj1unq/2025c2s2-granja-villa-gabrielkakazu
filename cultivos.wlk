@@ -1,6 +1,7 @@
 import wollok.game.*
 import personaje.*
 import bonus.*
+import granja.*
 
 class Maiz {
 
@@ -33,12 +34,7 @@ class Maiz {
 		return estado.listoParaCosechar()
 	}
 
-	method esCultivo() = true
-	method esMaiz() = true
 	method esTrigo() = false
-	method esTomaco() = false
-	method esAspersor() = false
-	method esMercado() = false
 
 }
 
@@ -79,14 +75,28 @@ class Tomaco {
 		const nuevoTomaco = new Tomaco(position = sembrador.position())
 	} 	
 
-
-	method regado(){
+/*
+	method regado0(){
 		if (position.y() == game.height()-1  )
 			//&& not granja.hayCultivo(game.at(position.x(), 0)) )
 		 	{position = game.at(position.x(), 0 )
 		} else if (not granja.hayCultivo(self.position().up(1)))
 		{
 			self.position(self.position().up(1))
+		}
+	} */
+
+
+	method regado(){
+		const arribaDeTodo = game.height()-1
+		const abajoDeTodo = game.at(position.x(), 0)
+
+		if (not granja.hayVisual(self.position().up(1)) 
+			&& position.y() < arribaDeTodo) {
+				self.position(self.position().up(1))
+		} else if (position.y() == arribaDeTodo &&
+			not granja.hayVisual(abajoDeTodo)) {
+				position = abajoDeTodo
 		}
 	}
 
@@ -138,12 +148,9 @@ class Trigo {
 		return evolucion.listoParaCosechar()
 	}
 
-	method esCultivo() = true
-	method esMaiz() = false
 	method esTrigo() = true
-	method esTomaco() = false
-	method esAspersor() = false
-	method esMercado() = false
+	method loQueSoy(cosa) = identificador.esTrigo(cosa)
+
 	
 }
 
